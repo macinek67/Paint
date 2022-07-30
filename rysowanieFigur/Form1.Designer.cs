@@ -34,7 +34,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.kolor = new System.Windows.Forms.Button();
+            this.grubosc = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grubosc)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -91,12 +93,37 @@
             this.kolor.UseVisualStyleBackColor = false;
             this.kolor.Click += new System.EventHandler(this.kolor_Click);
             // 
+            // grubosc
+            // 
+            this.grubosc.Location = new System.Drawing.Point(755, 44);
+            this.grubosc.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.grubosc.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.grubosc.Name = "grubosc";
+            this.grubosc.ReadOnly = true;
+            this.grubosc.Size = new System.Drawing.Size(36, 20);
+            this.grubosc.TabIndex = 6;
+            this.grubosc.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.grubosc.Click += new System.EventHandler(this.grubosc_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.grubosc);
             this.Controls.Add(this.kolor);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -106,6 +133,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grubosc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -118,6 +146,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button kolor;
+        private System.Windows.Forms.NumericUpDown grubosc;
     }
 }
 

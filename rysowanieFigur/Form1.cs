@@ -47,25 +47,26 @@ namespace rysowanieFigur
         }
 
         string f;
-        Figura[] figury = new Figura[99];
+        Figura[] figury = new Figura[99999];
         int nrFigury = 0;
+        int gruboscPedzla = 2;
 
         private void DodajFigure(MouseEventArgs me, int numerF, Pen pen)
         {
             if (f == "linia")
             {
                 g.DrawLine(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
-                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor);
+                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             }
             else if (f == "prostokat")
             {
                 g.DrawRectangle(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
-                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor);
+                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             }
             else if (f == "kolo")
             {
                 g.DrawEllipse(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
-                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor);
+                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             }
             nrFigury++;
         }
@@ -82,7 +83,7 @@ namespace rysowanieFigur
             }
             if (stan == stany.pierwszyPunktLini)
             {
-                Pen pen = new Pen(kolor.BackColor, 2);
+                Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
                 stan = stany.liniaStart;
                 DodajFigure(me, nrFigury, pen);
                 return;
@@ -95,12 +96,9 @@ namespace rysowanieFigur
             {
                 MouseEventArgs me = (MouseEventArgs)e;
                 g.Clear(Color.White);
-                foreach (var i in figury)
-                {
-                    if(i!=null)
-                        i.Rysuj();
-                }
-                Pen pen = new Pen(kolor.BackColor, 2);
+                for(int i=0; i<nrFigury; i++)
+                    figury[i].Rysuj();
+                Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
                 if(nrFigury!=0)
                     nrFigury--;
                 DodajFigure(me, nrFigury, pen);
@@ -126,6 +124,11 @@ namespace rysowanieFigur
             {
                 kolor.BackColor = colorDialog1.Color;
             }
+        }
+
+        private void grubosc_Click(object sender, EventArgs e)
+        {
+            gruboscPedzla = Convert.ToInt32(Math.Round(grubosc.Value, 0));
         }
     }
 }
