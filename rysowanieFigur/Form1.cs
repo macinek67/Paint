@@ -22,18 +22,19 @@ namespace rysowanieFigur
             kontur
         }
 
-        Graphics g;
+        Graphics g, g1;
         Bitmap bitmap = new Bitmap(805, 384);
+        Bitmap bitmap1 = new Bitmap(805, 384);
         Punkt punktStart = new Punkt(0,0);
         stany stan = stany.nieokreslony;
 
         public Form1()
         {
             InitializeComponent();
-            //bitmap.SetPixel(10, 10, Color.Red);
             pictureBox1.Image = (Image)bitmap;
             g = pictureBox1.CreateGraphics();
-            
+            pictureBox1.Controls.Add(pictureBox2);
+            g1 = pictureBox2.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -67,12 +68,12 @@ namespace rysowanieFigur
             }
             else if (f == "prostokat")
             {
-                g.DrawRectangle(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
+                g.DrawRectangle(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
                 figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             }
             else if (f == "kolo")
             {
-                g.DrawEllipse(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
+                g.DrawEllipse(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
                 figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             }
             nrFigury++;
@@ -92,6 +93,7 @@ namespace rysowanieFigur
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            pictureBox1.Controls.Clear();
             MouseEventArgs me = (MouseEventArgs)e;
             if (stan == stany.kontur)
             {

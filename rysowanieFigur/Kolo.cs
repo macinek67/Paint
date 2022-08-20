@@ -16,7 +16,7 @@ namespace rysowanieFigur
         public override void Rysuj()
         {
             Pen pen = new Pen(base.c, base.grubosc);
-            base.g.DrawEllipse(pen, x1, y1, x2, y2);
+            base.g.DrawEllipse(pen, x1, y1, x2-x1, y2-y1);
         }
     }
 }

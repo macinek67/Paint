@@ -10,16 +10,94 @@ namespace rysowanieFigur
 {
     class Uchwyt
     {
+        enum stany
+        {
+            nieokreslony,
+            pierwszyKlik
+        }
+        stany stan = stany.nieokreslony;
+        String ktoryUchwyt;
         private void uchwytClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Kliknieto przycisk: " + ((Button)sender).Name);
+            if (stan == stany.nieokreslony)
+            {
+                parent.MouseMove += uchwytMove;
+                stan = stany.pierwszyKlik;
+                ktoryUchwyt = UchwytName(sender);
+            }
+            else { stan = stany.nieokreslony; parent.MouseMove -= uchwytMove; }
         }
 
-        Point p1, p2;
-        public Uchwyt(Point p1, Point p2, Control parent, Graphics g)
+        private String UchwytName(object sender)
         {
-            this.p1 = p1;
-            this.p2 = p2;
+            return ((Button)sender).Name;
+        }
+
+        private void uchwytMove(object sender, MouseEventArgs e)
+        {
+            if(ktoryUchwyt.Equals("UchwytLT"))
+            {
+                p1.X = e.X;
+                p1.Y = e.Y;
+            }
+            else if (ktoryUchwyt.Equals("UchwytLB"))
+            {
+                p1.X = e.X;
+                p2.Y = e.Y;
+            }
+            else if (ktoryUchwyt.Equals("UchwytRT"))
+            {
+                p2.X = e.X;
+                p1.Y = e.Y;
+            }
+            else if (ktoryUchwyt.Equals("UchwytRB"))
+            {
+                p2.X = e.X;
+                p2.Y = e.Y;
+            }
+            dodajGuzikiRamki(p1, p2, parent, g);
+            rysujRamke(g);
+        }
+
+        private void rysujRamke(Graphics g)
+        {
+            g.Clear(Color.White);
+            int i = p1.X;
+            int i1 = p1.Y;
+            Pen pen = new Pen(Color.Black, 0.5f);
+            while (true)
+            {
+                if (p1.X < p2.X && i < p2.X)
+                {
+                    g.DrawLine(pen, new Point(i, p1.Y), new Point(i + 3, p1.Y)); i += 3;
+                    g.DrawLine(pen, new Point(i, p2.Y), new Point(i + 3, p2.Y)); i += 3;
+                }
+                else if (p1.X > p2.X && i > p2.X)
+                {
+                    g.DrawLine(pen, new Point(i, p1.Y), new Point(i - 3, p1.Y)); i -= 3;
+                    g.DrawLine(pen, new Point(i, p2.Y), new Point(i - 3, p2.Y)); i -= 3;
+                }
+                else break;
+            }
+            while (true)
+            {
+                if (p1.Y < p2.Y && i1 < p2.Y)
+                {
+                    g.DrawLine(pen, new Point(p1.X, i1), new Point(p1.X, i1 - 3)); i1 += 3;
+                    g.DrawLine(pen, new Point(p2.X, i1), new Point(p2.X, i1 - 3)); i1 += 3;
+                }
+                else if (p1.Y > p2.Y && i1 > p2.Y)
+                {
+                    g.DrawLine(pen, new Point(p1.X, i1), new Point(p1.X, i1 + 3)); i1 -= 3;
+                    g.DrawLine(pen, new Point(p2.X, i1), new Point(p2.X, i1 + 3)); i1 -= 3;
+                }
+                else break;
+            }
+        }
+
+        private void dodajGuzikiRamki(Point p1, Point p2, Control parent, Graphics g)
+        {
+            parent.Controls.Clear();
             Button LT = new Button();
             LT.Width = 10;
             LT.Height = 10;
@@ -52,38 +130,19 @@ namespace rysowanieFigur
             parent.Controls.Add(RT);
             parent.Controls.Add(LB);
             parent.Controls.Add(RB);
-            int i = p1.X;
-            int i1 = p1.Y;
-            Pen pen = new Pen(Color.Black, 0.5f);
-            while(true)
-            {
-                if (p1.X < p2.X && i < p2.X)
-                {
-                    g.DrawLine(pen, new Point(i, p1.Y), new Point(i + 3, p1.Y)); i += 3;
-                    g.DrawLine(pen, new Point(i, p2.Y), new Point(i + 3, p2.Y)); i += 3;
-                }
-                else if (p1.X > p2.X && i > p2.X)
-                {
-                    g.DrawLine(pen, new Point(i, p1.Y), new Point(i - 3, p1.Y)); i -= 3;
-                    g.DrawLine(pen, new Point(i, p2.Y), new Point(i - 3, p2.Y)); i -= 3;
-                }
-                else break;
-            }
-            while(true)
-            {
-                if (p1.Y < p2.Y && i1 < p2.Y)
-                {
-                    g.DrawLine(pen, new Point(p1.X, i1), new Point(p1.X, i1 - 3)); i1 += 3;
-                    g.DrawLine(pen, new Point(p2.X, i1), new Point(p2.X, i1 - 3)); i1 += 3;
-                }
-                else if (p1.Y > p2.Y && i1 > p2.Y)
-                {
-                    g.DrawLine(pen, new Point(p1.X, i1), new Point(p1.X, i1 + 3)); i1 -= 3;
-                    g.DrawLine(pen, new Point(p2.X, i1), new Point(p2.X, i1 + 3)); i1 -= 3;
-                }
-                else break;
-            }
+        }
 
+        Point p1, p2;
+        Control parent;
+        Graphics g;
+        public Uchwyt(Point p1, Point p2, Control parent, Graphics g)
+        {
+            this.p1 = p1;
+            this.p2 = p2;
+            this.parent = parent;
+            this.g = g;
+            dodajGuzikiRamki(p1, p2, parent, g);
+            rysujRamke(g);
         }
     }
 }

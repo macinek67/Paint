@@ -36,8 +36,10 @@
             this.kolor = new System.Windows.Forms.Button();
             this.grubosc = new System.Windows.Forms.NumericUpDown();
             this.buttonKontur = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grubosc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -128,12 +130,23 @@
             this.buttonKontur.UseVisualStyleBackColor = true;
             this.buttonKontur.Click += new System.EventHandler(this.buttonKontur_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Enabled = false;
+            this.pictureBox2.Location = new System.Drawing.Point(2, 70);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(797, 381);
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.buttonKontur);
             this.Controls.Add(this.grubosc);
             this.Controls.Add(this.kolor);
@@ -146,6 +159,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grubosc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -160,6 +174,7 @@
         private System.Windows.Forms.Button kolor;
         private System.Windows.Forms.NumericUpDown grubosc;
         private System.Windows.Forms.Button buttonKontur;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
