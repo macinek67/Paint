@@ -35,6 +35,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.kolor = new System.Windows.Forms.Button();
             this.grubosc = new System.Windows.Forms.NumericUpDown();
+            this.buttonKontur = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grubosc)).BeginInit();
             this.SuspendLayout();
@@ -117,12 +118,23 @@
             0});
             this.grubosc.Click += new System.EventHandler(this.grubosc_Click);
             // 
+            // buttonKontur
+            // 
+            this.buttonKontur.Location = new System.Drawing.Point(390, 1);
+            this.buttonKontur.Name = "buttonKontur";
+            this.buttonKontur.Size = new System.Drawing.Size(75, 23);
+            this.buttonKontur.TabIndex = 7;
+            this.buttonKontur.Text = "kontur";
+            this.buttonKontur.UseVisualStyleBackColor = true;
+            this.buttonKontur.Click += new System.EventHandler(this.buttonKontur_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonKontur);
             this.Controls.Add(this.grubosc);
             this.Controls.Add(this.kolor);
             this.Controls.Add(this.button3);
@@ -147,6 +159,7 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button kolor;
         private System.Windows.Forms.NumericUpDown grubosc;
+        private System.Windows.Forms.Button buttonKontur;
     }
 }
 

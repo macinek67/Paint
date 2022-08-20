@@ -19,19 +19,21 @@ namespace rysowanieFigur
             nieokreslony,
             liniaStart,
             pierwszyPunktLini,
-            
+            kontur
         }
 
         Graphics g;
-        Bitmap bitmap = new Bitmap(200, 200);
+        Bitmap bitmap = new Bitmap(805, 384);
         Punkt punktStart = new Punkt(0,0);
         stany stan = stany.nieokreslony;
 
         public Form1()
         {
             InitializeComponent();
+            //bitmap.SetPixel(10, 10, Color.Red);
             pictureBox1.Image = (Image)bitmap;
             g = pictureBox1.CreateGraphics();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,12 +48,17 @@ namespace rysowanieFigur
             f = "linia";
         }
 
+        private void uchwytClick(object sender, EventArgs e)
+        {
+
+        }
+
         string f;
         Figura[] figury = new Figura[99999];
         int nrFigury = 0;
         int gruboscPedzla = 2;
 
-        private void DodajFigure(MouseEventArgs me, int numerF, Pen pen)
+        private void DodajFigure(MouseEventArgs me, Pen pen)
         {
             if (f == "linia")
             {
@@ -71,9 +78,26 @@ namespace rysowanieFigur
             nrFigury++;
         }
 
+        Color GetPixel(Point p)
+        {
+            using (var bitmap = new Bitmap(1, 1))
+            {
+                using (var graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.CopyFromScreen(p, new Point(0, 0), new Size(1, 1));
+                }
+                return bitmap.GetPixel(0, 0);
+            }
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
+            if (stan == stany.kontur)
+            {
+                Color color = GetPixel(new Point(Cursor.Position.X, Cursor.Position.Y));
+                Uchwyt u = new Uchwyt(new Point(figury[0].x1, figury[0].y1), new Point(figury[0].x2, figury[0].y2), pictureBox1, g);
+            }
             if (stan==stany.liniaStart)
             {
                 punktStart.x = me.Location.X;
@@ -85,7 +109,7 @@ namespace rysowanieFigur
             {
                 Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
                 stan = stany.liniaStart;
-                DodajFigure(me, nrFigury, pen);
+                DodajFigure(me, pen);
                 return;
             }
         }
@@ -101,7 +125,7 @@ namespace rysowanieFigur
                 Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
                 if(nrFigury!=0)
                     nrFigury--;
-                DodajFigure(me, nrFigury, pen);
+                DodajFigure(me, pen);
                 return;
             }
         }
@@ -121,14 +145,17 @@ namespace rysowanieFigur
         private void kolor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
                 kolor.BackColor = colorDialog1.Color;
-            }
         }
 
         private void grubosc_Click(object sender, EventArgs e)
         {
             gruboscPedzla = Convert.ToInt32(Math.Round(grubosc.Value, 0));
+        }
+
+        private void buttonKontur_Click(object sender, EventArgs e)
+        {
+            stan = stany.kontur;
         }
     }
 }
