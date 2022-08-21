@@ -44,9 +44,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(-2, 70);
+            this.pictureBox1.Location = new System.Drawing.Point(1, 70);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(805, 384);
             this.pictureBox1.TabIndex = 0;
@@ -134,7 +134,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Enabled = false;
-            this.pictureBox2.Location = new System.Drawing.Point(2, 70);
+            this.pictureBox2.Location = new System.Drawing.Point(1, 73);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(797, 381);
             this.pictureBox2.TabIndex = 8;

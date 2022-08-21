@@ -24,8 +24,9 @@ namespace rysowanieFigur
                 parent.MouseMove += uchwytMove;
                 stan = stany.pierwszyKlik;
                 ktoryUchwyt = UchwytName(sender);
+                //child.Visible = true;
             }
-            else { stan = stany.nieokreslony; parent.MouseMove -= uchwytMove; }
+            else { stan = stany.nieokreslony; parent.MouseMove -= uchwytMove; child.Visible = false; }
         }
 
         private String UchwytName(object sender)
@@ -133,14 +134,15 @@ namespace rysowanieFigur
         }
 
         Point p1, p2;
-        Control parent;
+        Control parent, child;
         Graphics g;
-        public Uchwyt(Point p1, Point p2, Control parent, Graphics g)
+        public Uchwyt(Point p1, Point p2, Control parent, Graphics g, Control child)
         {
             this.p1 = p1;
             this.p2 = p2;
             this.parent = parent;
             this.g = g;
+            this.child = child;
             dodajGuzikiRamki(p1, p2, parent, g);
             rysujRamke(g);
         }

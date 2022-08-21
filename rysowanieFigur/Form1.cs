@@ -34,12 +34,14 @@ namespace rysowanieFigur
             pictureBox1.Image = (Image)bitmap;
             g = pictureBox1.CreateGraphics();
             pictureBox1.Controls.Add(pictureBox2);
+            pictureBox2.Location = new Point(0, 0);
+            pictureBox2.BackColor = Color.Transparent;
             g1 = pictureBox2.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            this.SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
         }
 
 
@@ -98,7 +100,7 @@ namespace rysowanieFigur
             if (stan == stany.kontur)
             {
                 Color color = GetPixel(new Point(Cursor.Position.X, Cursor.Position.Y));
-                Uchwyt u = new Uchwyt(new Point(figury[0].x1, figury[0].y1), new Point(figury[0].x2, figury[0].y2), pictureBox1, g);
+                Uchwyt u = new Uchwyt(new Point(figury[0].x1, figury[0].y1), new Point(figury[0].x2, figury[0].y2), pictureBox1, g, pictureBox2);
             }
             if (stan==stany.liniaStart)
             {
