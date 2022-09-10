@@ -24,9 +24,8 @@ namespace rysowanieFigur
                 parent.MouseMove += uchwytMove;
                 stan = stany.pierwszyKlik;
                 ktoryUchwyt = UchwytName(sender);
-                //child.Visible = true;
             }
-            else { stan = stany.nieokreslony; parent.MouseMove -= uchwytMove; child.Visible = false; }
+            else { stan = stany.nieokreslony; parent.MouseMove -= uchwytMove; }
         }
 
         private String UchwytName(object sender)

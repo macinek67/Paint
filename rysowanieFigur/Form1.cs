@@ -31,17 +31,18 @@ namespace rysowanieFigur
         public Form1()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            bitmap.MakeTransparent(Color.White);
             pictureBox1.Image = (Image)bitmap;
             g = pictureBox1.CreateGraphics();
-            pictureBox1.Controls.Add(pictureBox2);
-            pictureBox2.Location = new Point(0, 0);
-            pictureBox2.BackColor = Color.Transparent;
+            pictureBox2.Image = (Image)bitmap1;
+            pictureBox2.BackColor = Color.Yellow;
             g1 = pictureBox2.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.SetStyle(System.Windows.Forms.ControlStyles.SupportsTransparentBackColor, true);
+
         }
 
 
@@ -60,23 +61,25 @@ namespace rysowanieFigur
         Figura[] figury = new Figura[99999];
         int nrFigury = 0;
         int gruboscPedzla = 2;
+        Color shadowElementColor = new Color();
 
         private void DodajFigure(MouseEventArgs me, Pen pen)
         {
+            shadowElementColor = Color.FromArgb(0, 0, nrFigury);
             if (f == "linia")
             {
                 g.DrawLine(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
-                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
+                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
             }
             else if (f == "prostokat")
             {
                 g.DrawRectangle(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
-                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
+                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
             }
             else if (f == "kolo")
             {
                 g.DrawEllipse(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
-                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
+                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
             }
             nrFigury++;
         }
@@ -99,8 +102,10 @@ namespace rysowanieFigur
             MouseEventArgs me = (MouseEventArgs)e;
             if (stan == stany.kontur)
             {
-                Color color = GetPixel(new Point(Cursor.Position.X, Cursor.Position.Y));
-                Uchwyt u = new Uchwyt(new Point(figury[0].x1, figury[0].y1), new Point(figury[0].x2, figury[0].y2), pictureBox1, g, pictureBox2);
+                Color pixelColor = GetPixel(new Point(Cursor.Position.X, Cursor.Position.Y));
+                for(int i = 0; i < nrFigury; i++)
+                    if(figury[i].shadowColor==pixelColor)
+                        new Uchwyt(new Point(figury[i].x1, figury[i].y1), new Point(figury[i].x2, figury[i].y2), pictureBox1, g, pictureBox2);
             }
             if (stan==stany.liniaStart)
             {
@@ -124,7 +129,8 @@ namespace rysowanieFigur
             {
                 MouseEventArgs me = (MouseEventArgs)e;
                 g.Clear(Color.White);
-                for(int i=0; i<nrFigury; i++)
+                g1.Clear(Color.White);
+                for (int i=0; i<nrFigury; i++)
                     figury[i].Rysuj();
                 Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
                 if(nrFigury!=0)
@@ -155,6 +161,11 @@ namespace rysowanieFigur
         private void grubosc_Click(object sender, EventArgs e)
         {
             gruboscPedzla = Convert.ToInt32(Math.Round(grubosc.Value, 0));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox2.TabIndex = 0;
         }
 
         private void buttonKontur_Click(object sender, EventArgs e)
