@@ -57,6 +57,14 @@ namespace rysowanieFigur
             }
             dodajGuzikiRamki(p1, p2, parent, g);
             rysujRamke(g);
+            for (int i = 0; i < figureCount; i++)
+            {
+                figureList[0].x1 = p1.X;
+                figureList[0].x2 = p2.X;
+                figureList[0].y1 = p1.Y;
+                figureList[0].y2 = p2.Y;
+                figureList[i].Rysuj();
+            }
         }
 
         private void rysujRamke(Graphics g)
@@ -98,6 +106,7 @@ namespace rysowanieFigur
         private void dodajGuzikiRamki(Point p1, Point p2, Control parent, Graphics g)
         {
             parent.Controls.Clear();
+            g.Clear(Color.White);
             Button LT = new Button();
             LT.Width = 10;
             LT.Height = 10;
@@ -133,17 +142,22 @@ namespace rysowanieFigur
         }
 
         Point p1, p2;
-        Control parent, child;
+        Control parent;
         Graphics g;
-        public Uchwyt(Point p1, Point p2, Control parent, Graphics g, Control child)
+        Figura[] figureList;
+        int figureCount;
+        public Uchwyt(Point p1, Point p2, Control parent, Graphics g, Figura[] figureList, int figureCount)
         {
             this.p1 = p1;
             this.p2 = p2;
             this.parent = parent;
             this.g = g;
-            this.child = child;
+            this.figureList = figureList;
+            this.figureCount = figureCount;
             dodajGuzikiRamki(p1, p2, parent, g);
             rysujRamke(g);
+            for (int i = 0; i < figureCount; i++)
+                figureList[i].Rysuj();
         }
     }
 }

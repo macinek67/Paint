@@ -22,22 +22,17 @@ namespace rysowanieFigur
             kontur
         }
 
-        Graphics g, g1;
+        Graphics g;
         Bitmap bitmap = new Bitmap(805, 384);
-        Bitmap bitmap1 = new Bitmap(805, 384);
         Punkt punktStart = new Punkt(0,0);
         stany stan = stany.nieokreslony;
 
         public Form1()
         {
             InitializeComponent();
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            bitmap.MakeTransparent(Color.White);
             pictureBox1.Image = (Image)bitmap;
             g = pictureBox1.CreateGraphics();
-            pictureBox2.Image = (Image)bitmap1;
-            pictureBox2.BackColor = Color.Yellow;
-            g1 = pictureBox2.CreateGraphics();
+            g.Clear(Color.White);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -67,20 +62,11 @@ namespace rysowanieFigur
         {
             shadowElementColor = Color.FromArgb(0, 0, nrFigury);
             if (f == "linia")
-            {
-                g.DrawLine(pen, punktStart.x, punktStart.y, me.Location.X, me.Location.Y);
-                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
-            }
+                figury[nrFigury] = new Linia(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             else if (f == "prostokat")
-            {
-                g.DrawRectangle(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
-                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
-            }
+                figury[nrFigury] = new Prostokat(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             else if (f == "kolo")
-            {
-                g.DrawEllipse(pen, punktStart.x, punktStart.y, me.Location.X - punktStart.x, me.Location.Y - punktStart.y);
-                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla, g1, shadowElementColor);
-            }
+                figury[nrFigury] = new Kolo(punktStart.x, punktStart.y, me.Location.X, me.Location.Y, g, kolor.BackColor, gruboscPedzla);
             nrFigury++;
         }
 
@@ -103,9 +89,7 @@ namespace rysowanieFigur
             if (stan == stany.kontur)
             {
                 Color pixelColor = GetPixel(new Point(Cursor.Position.X, Cursor.Position.Y));
-                for(int i = 0; i < nrFigury; i++)
-                    if(figury[i].shadowColor==pixelColor)
-                        new Uchwyt(new Point(figury[i].x1, figury[i].y1), new Point(figury[i].x2, figury[i].y2), pictureBox1, g, pictureBox2);
+                new Uchwyt(new Point(figury[0].x1, figury[0].y1), new Point(figury[0].x2, figury[0].y2), pictureBox1, g, figury, nrFigury);
             }
             if (stan==stany.liniaStart)
             {
@@ -129,7 +113,6 @@ namespace rysowanieFigur
             {
                 MouseEventArgs me = (MouseEventArgs)e;
                 g.Clear(Color.White);
-                g1.Clear(Color.White);
                 for (int i=0; i<nrFigury; i++)
                     figury[i].Rysuj();
                 Pen pen = new Pen(kolor.BackColor, gruboscPedzla);
@@ -161,11 +144,6 @@ namespace rysowanieFigur
         private void grubosc_Click(object sender, EventArgs e)
         {
             gruboscPedzla = Convert.ToInt32(Math.Round(grubosc.Value, 0));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pictureBox2.TabIndex = 0;
         }
 
         private void buttonKontur_Click(object sender, EventArgs e)

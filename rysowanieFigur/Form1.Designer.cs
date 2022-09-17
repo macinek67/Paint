@@ -36,20 +36,17 @@
             this.kolor = new System.Windows.Forms.Button();
             this.grubosc = new System.Windows.Forms.NumericUpDown();
             this.buttonKontur = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grubosc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 258);
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 38);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(805, 218);
+            this.pictureBox1.Size = new System.Drawing.Size(806, 478);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -57,7 +54,7 @@
             // 
             // buttonLinia
             // 
-            this.buttonLinia.Location = new System.Drawing.Point(1, 1);
+            this.buttonLinia.Location = new System.Drawing.Point(3, 6);
             this.buttonLinia.Name = "buttonLinia";
             this.buttonLinia.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.buttonLinia.Size = new System.Drawing.Size(75, 23);
@@ -68,7 +65,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(82, 1);
+            this.button2.Location = new System.Drawing.Point(84, 6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -78,7 +75,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(163, 1);
+            this.button3.Location = new System.Drawing.Point(165, 6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -99,7 +96,7 @@
             // 
             // grubosc
             // 
-            this.grubosc.Location = new System.Drawing.Point(755, 44);
+            this.grubosc.Location = new System.Drawing.Point(727, 12);
             this.grubosc.Maximum = new decimal(new int[] {
             99,
             0,
@@ -123,7 +120,7 @@
             // 
             // buttonKontur
             // 
-            this.buttonKontur.Location = new System.Drawing.Point(390, 1);
+            this.buttonKontur.Location = new System.Drawing.Point(400, 6);
             this.buttonKontur.Name = "buttonKontur";
             this.buttonKontur.Size = new System.Drawing.Size(75, 23);
             this.buttonKontur.TabIndex = 7;
@@ -131,33 +128,12 @@
             this.buttonKontur.UseVisualStyleBackColor = true;
             this.buttonKontur.Click += new System.EventHandler(this.buttonKontur_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Enabled = false;
-            this.pictureBox2.Location = new System.Drawing.Point(1, 57);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(797, 368);
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(536, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "zmien wartswe";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 514);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonKontur);
             this.Controls.Add(this.grubosc);
             this.Controls.Add(this.kolor);
@@ -165,13 +141,11 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.buttonLinia);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grubosc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -186,8 +160,6 @@
         private System.Windows.Forms.Button kolor;
         private System.Windows.Forms.NumericUpDown grubosc;
         private System.Windows.Forms.Button buttonKontur;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -12,11 +12,10 @@ namespace rysowanieFigur
     abstract class Figura
     {
         public int x1, y1, x2, y2;
-        public Graphics g, g1;
+        public Graphics g;
         public Color c;
-        public Color shadowColor;
         public int grubosc;
-        public Figura(int x1, int y1, int x2, int y2, Graphics gr, Color c, int grubosc, Graphics gr1, Color shadow)
+        public Figura(int x1, int y1, int x2, int y2, Graphics gr, Color c, int grubosc)
         {
             this.x1 = x1;
             this.y1 = y1;
@@ -25,8 +24,6 @@ namespace rysowanieFigur
             g = gr;
             this.c = c;
             this.grubosc = grubosc;
-            g1 = gr1;
-            shadowColor = shadow;
         }
         abstract public void Rysuj();
      
